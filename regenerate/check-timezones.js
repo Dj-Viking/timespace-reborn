@@ -1,3 +1,4 @@
+/* eslint-disable */
 /**
  * Removes timezones that are not supported by moment-timezone.
  *
@@ -21,13 +22,13 @@ var knownIssues = {
 
 var buffer = fs.readFileSync(datafile);
 
-zlib.gunzip(buffer, function(err, data) {
+zlib.gunzip(buffer, function (err, data) {
   if (err) throw err;
 
   var zones = JSON.parse(data);
 
   // filter out timezones not supported by moment-timezone
-  zones.features = zones.features.filter(function(zone) {
+  zones.features = zones.features.filter(function (zone) {
 
     // check if tzid is in `moment-timezone` library
     if (moment.tz.zone(zone.properties.tzid) === null) {
@@ -48,7 +49,7 @@ zlib.gunzip(buffer, function(err, data) {
     } else return true;
   });
 
-  zlib.gzip(JSON.stringify(zones), function(err, result) {
+  zlib.gzip(JSON.stringify(zones), function (err, result) {
     if (err) throw err;
 
     fs.writeFileSync(outfile, result);

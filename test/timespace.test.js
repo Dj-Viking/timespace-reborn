@@ -1,3 +1,4 @@
+/* eslint-disable */
 var timezones = require('../lib/timezones.json');
 var test = require('tap').test;
 var moment = require('moment-timezone');
@@ -5,7 +6,7 @@ var ts = require('../');
 
 var z = Object.keys(timezones)[0].split('/').map(Number)[2];
 
-test('get parent', function(t) {
+test('get parent', function (t) {
   var tile = [344063, 802816, 21];
   var actual = ts._getParent(tile);
 
@@ -18,7 +19,7 @@ test('get parent', function(t) {
   t.end();
 });
 
-test('get children', function(t) {
+test('get children', function (t) {
   if (z === 8) {
     var tile = [20, 49, 7];
     var expected = [[40, 98, 8], [41, 98, 8], [41, 99, 8], [40, 99, 8]];
@@ -28,7 +29,7 @@ test('get children', function(t) {
     tile = [10, 24, 6];
     actual = ts._getChildren(tile);
     t.equal(actual.length, 16, 'finds 16 children')
-    actual.forEach(function(child) {
+    actual.forEach(function (child) {
       t.equal(child[2], 8, 'finds z8 child')
     });
   }
@@ -36,7 +37,7 @@ test('get children', function(t) {
   t.end();
 });
 
-test('check zone', function(t) {
+test('check zone', function (t) {
   var timestamp = 1472168219655;
   var point = [-122.27783203125, 37.84015683604136];
   var tile = [41, 98, 8];
@@ -59,7 +60,7 @@ test('check zone', function(t) {
   t.end();
 });
 
-test('check lower zoom levels', function(t) {
+test('check lower zoom levels', function (t) {
   // z7
   var quadkeyZ7 = '0230102';
   var quadkeyZ6 = '023010';
@@ -79,7 +80,7 @@ test('check lower zoom levels', function(t) {
 });
 
 
-test('check higher zoom levels', function(t) {
+test('check higher zoom levels', function (t) {
   var tile, quadkey;
 
   // z9
@@ -193,7 +194,7 @@ test('check higher zoom levels', function(t) {
   }
 
   // z19
-  tile = [86015, 200704,  19];
+  tile = [86015, 200704, 19];
   quadkey = '023010211111111111';
   if (z === 8) {
     t.equal(ts.getFuzzyTimezoneFromTile(tile), 'America/Los_Angeles');

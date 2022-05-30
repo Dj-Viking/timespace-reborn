@@ -1,3 +1,4 @@
+/* eslint-disable */
 var tiles = require('./lib/timezones.json');
 var tilebelt = require('@mapbox/tilebelt');
 var moment = require('moment-timezone');
@@ -16,7 +17,7 @@ module.exports = {
 /**
  * Returns the local time at the point of interest.
  * @param  {Integer} timestamp   a unix timestamp
- * @param  {Array}   point       a [lng, lat] point of interest
+ * @param  {[number, number]}   point       a [lng, lat] point of interest
  * @return {Object}              a moment-timezone object
  */
 function getFuzzyLocalTimeFromPoint(timestamp, point) {
@@ -49,7 +50,7 @@ function getFuzzyTimezoneFromTile(tile) {
     var children = _getChildren(tile);
     var votes = [];  // list of timezone abbrevations
     var abbrs = {};  // abbrevation to full name lookup table
-    children.forEach(function(child) {
+    children.forEach(function (child) {
       key = child.join('/');
       if (key in tiles) {
         var tz = tiles[key];   // timezone name
@@ -97,7 +98,7 @@ function _getChildren(tile) {
 
   var children = tilebelt.getChildren(tile);
   return _getChildren(children[0])
-         .concat(_getChildren(children[1]))
-         .concat(_getChildren(children[2]))
-         .concat(_getChildren(children[3]));
+    .concat(_getChildren(children[1]))
+    .concat(_getChildren(children[2]))
+    .concat(_getChildren(children[3]));
 }

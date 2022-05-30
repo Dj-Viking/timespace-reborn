@@ -1,3 +1,4 @@
+/* eslint-disable */
 /**
  * Qunatize timezone.
  *
@@ -27,13 +28,13 @@ var tzNames = {};
 
 // load timezone polygons
 var timezoneBuffer = fs.readFileSync(path.join(__dirname, '../timezones.geojson.gz'));
-zlib.gunzip(timezoneBuffer, function(err, data) {
+zlib.gunzip(timezoneBuffer, function (err, data) {
   if (err) throw err;
 
 
   zones = JSON.parse(data);
 
-  zones = zones.features.filter(function(zone) {
+  zones = zones.features.filter(function (zone) {
     return moment.tz.zone(zone.properties.tzid) !== null;
   });
   totalZones = zones.length;
@@ -42,7 +43,7 @@ zlib.gunzip(timezoneBuffer, function(err, data) {
 
   // find which z7 tiles these these zones cover
   var q = d3.queue();
-  zones.forEach(function(zone) {
+  zones.forEach(function (zone) {
     q.defer(coverTile, zone)
   });
 
@@ -53,7 +54,7 @@ zlib.gunzip(timezoneBuffer, function(err, data) {
       throw err;
     }
 
-    Object.keys(tiles).forEach(function(tile) {
+    Object.keys(tiles).forEach(function (tile) {
       tiles[tile] = tiles[tile].name;
     });
 
@@ -64,16 +65,16 @@ zlib.gunzip(timezoneBuffer, function(err, data) {
 
 
 function coverTile(zone, done) {
-  var opts = {min_zoom: z, max_zoom: z};
+  var opts = { min_zoom: z, max_zoom: z };
 
-  cover.tiles(zone.geometry, opts).forEach(function(tile) {
+  cover.tiles(zone.geometry, opts).forEach(function (tile) {
     var id = tile.join('/');
     var poly = turf.polygon(tilebelt.tileToGeoJSON(tile).coordinates);
 
     try {
       var overlap = turf.area(turf.intersect(zone, poly));
       if (!tiles[id] || tiles[id].overlap < overlap)
-        tiles[id] = {name: zone.properties.tzid, overlap: overlap};
+        tiles[id] = { name: zone.properties.tzid, overlap: overlap };
     } catch (e) {
       console.log('Error detected: ' + e.message + '; zone: ' + zone.properties.tzid + '; tile: ' + id);
     }

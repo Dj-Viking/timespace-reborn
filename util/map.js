@@ -1,3 +1,4 @@
+/* eslint-disable */
 /**
  * USE:
  *   node map.js | tippecanoe -z8 -f -o zones.mbtiles
@@ -12,8 +13,8 @@ var timezones = require('../lib/timezones.json');
 
 var fc = turf.featurecollection([]);
 
-Object.keys(timezones).forEach(function(timezone){
+Object.keys(timezones).forEach(function (timezone) {
   var poly = turf.polygon(tilebelt.tileToGeoJSON(timezone.split('/').map(Number)).coordinates);
-  poly.properties.zone = timezones[timezone]
-  console.log(JSON.stringify(poly))
+  poly.properties.zone = timezones[timezone];
+  console.log(JSON.stringify(poly));
 });
