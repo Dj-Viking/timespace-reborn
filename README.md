@@ -46,6 +46,14 @@ If a tile/quadkey with zoom levels < 8 is passed into timespace functions, the m
 
 ## Regenerate timezones.json
 
+<span style="font-size: 30px; color: red;">DEPENDENCIES for regenerating</span>
+```sh
+brew install ogr2ogr
+```
+* this is for the regenerate-timezones script that calls this resource from inside the script 
+
+---
+
 To update timezone.json,
 1. find the link address of the latest timezones.shapefile.zip release from https://github.com/evansiroky/timezone-boundary-builder/releases,
 2. replace the link address in [this line](https://github.com/mapbox/timespace/blob/master/regenerate/regenerate-timezones.sh#L1) with the the link from step 1

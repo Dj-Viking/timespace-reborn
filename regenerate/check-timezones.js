@@ -1,4 +1,5 @@
 /* eslint-disable */
+// @ts-check
 /**
  * Removes timezones that are not supported by moment-timezone.
  *
@@ -11,6 +12,8 @@ var zlib = require('zlib');
 var moment = require('moment-timezone');
 
 var datafile = process.argv[2];
+
+console.log("what is the data file", datafile);
 var outfile = process.argv[3];
 
 if (!datafile) throw new Error('Timezone geojson file is required.');
@@ -21,10 +24,23 @@ var knownIssues = {
 };
 
 var buffer = fs.readFileSync(datafile);
-
 zlib.gunzip(buffer, function (err, data) {
   if (err) throw err;
 
+  console.log("data to json", data.toJSON());
+
+  // console.log("what happens here stringify", JSON.stringify(data.toJSON()));
+  // console.log("what happens here parse", JSON.parse(data.toJSON()));
+  fs.writeFile("./json-file-of-gzip-data-buffer.json", JSON.stringify(data.toJSON(), null, 2).split("\n")[0], (err) => {
+    if (err) throw err;
+    console.log("\x1b[33m WROTE JSON FILE!!! \x1b[00m");
+  });
+
+  //zones hopefully becomes combined.json which should be the result of g-unzipping timezones.geojson.gz
+  /**
+   * @type {Zones}
+   */
+  //@ts-expect-error TODO trying to figure this out as we speak
   var zones = JSON.parse(data);
 
   // filter out timezones not supported by moment-timezone

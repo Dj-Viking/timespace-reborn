@@ -2,7 +2,11 @@
 logs
 *.log
 npm-debug.log*
-
+combined.json
+timezones.*
+timezone-*
+tz_*
+combined-*
 # Runtime data
 pids
 *.pid

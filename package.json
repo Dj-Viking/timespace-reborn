@@ -14,16 +14,17 @@
     "simple-statistics": "^2.3.0",
     "tile-cover": "^3.0.1"
   },
+  "scripts": {
+    "readbuf": "node readgzip.js",
+    "test": "npm run lint; tap -R spec test/*.test.js;",
+    "lint": "eslint *.js --fix",
+    "regenerate": "regenerate/regenerate-timezones.sh"
+  },
   "devDependencies": {
     "eslint": "^8.16.0",
     "eslint-config-mourner": "^2.0.0",
     "tap": "^16.2.0",
     "turf": "^3.0.14"
-  },
-  "scripts": {
-    "test": "npm run lint; tap -R spec test/*.test.js;",
-    "lint": "eslint *.js --fix",
-    "regenerate": "regenerate/regenerate-timezones.sh"
   },
   "repository": {
     "type": "git",
