@@ -4,6 +4,7 @@ logs
 npm-debug.log*
 combined.json
 timezones.*
+timezonez.*
 timezone-*
 tz_*
 combined-*
