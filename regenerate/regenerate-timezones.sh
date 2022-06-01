@@ -11,9 +11,13 @@ rm tz_world_mp.zip;
 ogr2ogr -f GeoJSON timezones.geojson combined_shapefile.shp;
 gzip -f timezones.geojson;
 
+# move gz file the rust folder for the reader
+mv timezones.geojson.gz rust-reader/;
+npm run rust:run;
+
 # arg2 datafile arg3 outfile
-node ./regenerate/check-timezones.js timezones.geojson.gz timezones.geojson.gz;
-node ./regenerate/quantize.js 8
+# node ./regenerate/check-timezones.js timezones.geojson.gz timezones.geojson.gz;
+# node ./regenerate/quantize.js 8
 # rm timezones.geojson.gz;
 # rm combined-shapefile.dbf;
 # rm combined-shapefile.prj;

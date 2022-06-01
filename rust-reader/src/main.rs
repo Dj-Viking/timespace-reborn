@@ -1,6 +1,8 @@
 use flate2::read::GzDecoder;
-use std::io::prelude::*;
+use std::fs::File;
+// use std::io::prelude::*;
 use std::{env, io};
+use tar::Archive;
 
 fn main() -> io::Result<()> {
     println!("READ GZIP!");
@@ -8,15 +10,22 @@ fn main() -> io::Result<()> {
 
     let args: Vec<String> = env::args().collect();
 
-    println!("{:?}", args);
+    println!("{:?}", args[1]);
 
-    let mut buffer = String::new();
-    let stdin = io::stdin();
-    let mut handle = stdin.lock();
+    let path: &String = &args[1];
 
-    handle.read_line(&mut buffer)?;
+    let tar_gz: File = File::open(path)?;
+    let tar: GzDecoder<File> = GzDecoder::new(tar_gz);
+    let mut archive: Archive<GzDecoder<File>> = Archive::new(tar);
+    archive.unpack(".")?;
 
-    println!("newly created string from buffer {}", buffer);
+    // let mut buffer = String::new();
+    // let stdin = io::stdin();
+    // let mut handle = stdin.lock();
+
+    // handle.read_line(&mut buffer)?;
+
+    // println!("newly created string from buffer {}", buffer);
 
     Ok(())
 }
