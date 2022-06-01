@@ -82,7 +82,7 @@ function coverTile(zone, done) {
   });
 
   zonesDone++;
-  console.info('Processed', zonesDone + '/' + totalZones)
+  console.info(zone.properties.tzid, 'Processed', zonesDone + '/' + totalZones)
 
   done();
 }
