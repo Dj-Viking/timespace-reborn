@@ -15,6 +15,8 @@
     "tile-cover": "^3.0.1"
   },
   "scripts": {
+    "rust:build": "cd rust-reader; cargo build",
+    "rust:run": "cd rust-reader; cargo run timezones.geojson.gz",
     "readbuf": "node readgzip.js",
     "test": "npm run lint; tap -R spec test/*.test.js;",
     "lint": "eslint *.js --fix",

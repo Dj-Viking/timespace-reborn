@@ -8,7 +8,8 @@ declare type Zones = {
             };
             "geometry": {
                 "type": string | "Polygon"
-                "coordinates": Uint8Array;
+                // unknown array depths....at least 2 or 3 dimensions...probably 3 but don't know
+                "coordinates": Array<unknown>;
             }
         }
     >
